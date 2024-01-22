@@ -1,3 +1,4 @@
-Jaxon King
-jrking0615@my.msutexas.edu
-![Screenshot](/pictures/124739591.png)
+##Jaxon King
+####Repo: 3013 Algorithims
+####Email: jrking0615@my.msutexas.edu
+####Avatar: ![Screenshot](/pictures/124739591.png)
