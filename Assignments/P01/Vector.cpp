@@ -33,6 +33,12 @@ class Vector{
             }
         }
 
+        Vector(const Vector& v){
+            head = v.head;
+            rear = v.rear;
+            size = v.size;
+        }
+
         // Function for pushing a new node to the front of the linked list
         void pushFront(int inputValue){
             Node* newNode = new Node;

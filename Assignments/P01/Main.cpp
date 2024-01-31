@@ -60,7 +60,7 @@ int main(){
     cout<<x<<endl;
     // -1
 
-    //Vector v3(v1);
-    //v3.print();
+    Vector v3(v1);
+    v3.print();
     // [18, 20, 25, 9, 11, 25, 27, 33]
 }
