@@ -1,7 +1,9 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
+// node struct to hold a value and the next node in the list.
 struct Node{
     int value;
     struct Node* next;
@@ -9,8 +11,8 @@ struct Node{
 
 class Vector{
     private:
-        Node* head;
-        Node* rear;
+        Node* head;                         // pointer to keep track of head of the linked list
+        Node* rear;                         // pointer to keep track of the rear of the linked list
         int size = 0;
 
     public:
@@ -18,28 +20,45 @@ class Vector{
         Vector(){
             head = nullptr;
             rear = nullptr;
-            size = 0;
+            size = 0;                       // default values
         }
 
         // Copy from array Constructor
         Vector(int *A, int size){
             head = nullptr;
             rear = nullptr;
-            this->size = size;
+            this->size = size;              // default values except copying input size
 
             for(int i = 0; i < size; i++){
                 int temp = A[i];
-                pushRear(temp);
+                pushRear(temp);             // loops through input array and pushes it into list
             }
         }
 
-        Vector(const Vector& v){
-            head = v.head;
-            rear = v.rear;
-            size = v.size;
+        // Copy from data file Constructor
+        Vector(string fileName){
+            head = nullptr;
+            rear = nullptr;
+            size = 0;                       // default values
+
+            ifstream infile(fileName);      // open an input file as the input filename
+
+            int val;                        // placeholder integer
+            while(!infile.eof()){           // loops through all lines of input file until the end
+                infile >> val;
+                pushRear(val);              // pushes each integer into the vector
+            }
+            infile.close();                 // close infile
         }
 
-        // Function for pushing a new node to the front of the linked list
+        // copy Constructor
+        Vector(const Vector& v2){
+            head = v2.head;
+            rear = v2.rear;
+            size = v2.size;                 // copy all values of the vector class
+        }
+
+        // function for pushing a new node to the front of the linked list
         void pushFront(int inputValue){
             Node* newNode = new Node;
             newNode->value = inputValue;    // Node creation and value initialization
@@ -49,6 +68,11 @@ class Vector{
             head = newNode;                 // head is set as the newest node pushed in the front with this function
         }
 
+        // function to push another vector to the front of current vector
+        void pushFront(Vector v2){
+            v2.rear->next = head;            // end of inputted vector has the current vector put the end of it
+            head = v2.head;                  // current vector's head is set as the head of the input vector
+        }
 
         // function for pushing a new node to the rear of the linked list
         void pushRear(int inputValue){
@@ -72,13 +96,28 @@ class Vector{
         }
         
         // function for pushing another linked list onto the rear of the linked list
-        void pushRear(Vector vector){
-            Node* temp = vector.head;       // Sets a temp node as the passed in vector's head node
+        void pushRear(Vector v2){
+            Node* temp = v2.head;       // Sets a temp node as the passed in vector's head node
 
             while(temp != nullptr){         // Loops until end of linked list
                 pushRear(temp->value);      // pushes the value to the rear of the current linked list.
                 temp = temp->next;          // moves to next node
             }
+        }
+
+        // function to push value into location in the list
+        void pushAt(int loc, int val){
+            Node* travelNode = head;        // sets the travelnode as the head of the list
+
+            Node* tempNode = new Node;      
+            tempNode->value = val;          // Node creation and value initialization
+
+            for(int i = 0; i <= loc; i++){  // travels through list to location
+                travelNode = travelNode->next;
+            }
+
+            tempNode->next = travelNode->next;  // sets the next of the tempnode to travelnodes next
+            travelNode->next = tempNode;    // sets travelnodes next as tempnode
         }
 
         // function for pushing an input value  in order into a list (requires list to be in order already)
@@ -131,45 +170,67 @@ class Vector{
             return temp;
         }
 
+        // function to pop value from specific location in list
         int popAt(int loc){
             size--;                         // decrement of linked list size
 
-            Node* tempNode = head;
-            for(int i = 1; i <= loc; i++){
-                tempNode = tempNode->next;
+            if(loc > size - 1){             // if the index is bigger than the size of the list - 1 returns -1;
+                return -1;
             }
-            int tempValue = tempNode->value;
-            delete tempNode;
+
+            Node* tempNode = nullptr;       // sets tempnode as nullptr
+            Node* travelNode = head;        // sets travelnode as head to travel through
+
+            for(int i = 0; i < loc - 1; i++){  // goes from head to one before location node
+                travelNode = travelNode->next;
+            }
+
+            tempNode = travelNode->next;    // sets tempnode as the location value
+            int tempValue = tempNode->value; // sets the return value
+            
+            travelNode->next = tempNode->next; // sets the travelnodes next as the one after the location node
+
+            delete tempNode;                // delete tempnode to clear it out of memory
             return tempValue;
         }
         
+        // function to return value of location in list
         int find(int searchValue){
-            Node* tempNode = head;
+            Node* tempNode = head;          // sets temp node as the head of the list
 
             for(int i = 0; i < size; i++){
-                if(tempNode->value == searchValue){
-                    return i;
-                }else if(tempNode->next != nullptr){
+                if(tempNode->value == searchValue){ // if tempnode value is the search value, return the index value
+                    return i;           
+                }else if(tempNode->next != nullptr){ // if tempnodes next value isn't null, go to next node
                     tempNode = tempNode->next;
-                } else{
-                    return -1;
+                } else{                     // if the number doesnt exist in list, return -1
+                    return -1;              
                 }
             }
+
             return -1;
         }
 
-        void print(){
+        // function to print all values of list in a formatted fashion
+        void print(ofstream& outfile){
             Node* temp = head;              // set temp node to start printing from
 
+            outfile << "[";                 // front bracket! important
             cout << "[";
+
             while(temp != nullptr){         // Loops through list until empty
-                cout << temp->value;
+                cout << temp->value;        // prints value, also important
+                outfile << temp->value;
+                
                 temp = temp->next;          // moves to next node
 
                 if(temp != nullptr){        // if statement for print formatting
+                    outfile << ", ";
                     cout << ", ";
                 }
             }
+
+            outfile << "]" << endl;         // close bracket, also also important :)
             cout << "]" << endl;
         }
 };
