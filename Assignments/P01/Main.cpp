@@ -86,7 +86,7 @@ int main(){
     // 3, 4, 23, 18, 24, 26, 27, 54, 14, 12, 45, 65, 98, 56, 97, 15, 
     // 84, 98, 9, 11, 25, 33, 47, 51, 63, 18, 20, 25, 9, 11, 25, 27, 33]
 
-    v3.pushAt(3, 999); // added this for the pushAt function
+    v3.pushAt(3, 999); // added this example for the pushAt function
     v3.print(outfile);
     // [9, 11, 25, 999, 27, 33, 47, 51, 18, 20, 25, 9, 11, 25, 27, 33]
 

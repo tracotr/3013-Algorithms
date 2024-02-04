@@ -215,7 +215,7 @@ class Vector{
         void print(ofstream& outfile){
             Node* temp = head;              // set temp node to start printing from
 
-            outfile << "[";                 // front bracket! important
+            outfile << "[";                 // front bracket! important formatting :)
             cout << "[";
 
             while(temp != nullptr){         // Loops through list until empty
