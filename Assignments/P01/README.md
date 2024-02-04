@@ -2,7 +2,7 @@
 ### Jaxon King
 ### Description:
 
-A vector class using a linked list approach
+A integer vector class using a linked list approach
 
 ### Files
 
