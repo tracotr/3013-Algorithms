@@ -20,4 +20,7 @@ A program that uses a getch function to search through a dictionary.json
 - https://replit.com/@kingjaxon03/3013-P02-Starter-f run on replit :)
 - Will change if it gets fixed
 
-<img src="2.png" width="80">
+<img src="1.png" width="400">
+<img src="2.png" width="400">
+<img src="3.png" width="400">
+<img src="4.png" width="400">
