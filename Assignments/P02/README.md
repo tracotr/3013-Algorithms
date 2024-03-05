@@ -20,7 +20,7 @@ A program that uses a getch function to search through a dictionary.json
 - Will change if it gets fixed
 
 
-Here's it running in replit
+-Here's it running in replit
 <img src="1.png" width="800">
 <img src="2.png" width="800">
 <img src="3.png" width="800">
