@@ -16,7 +16,7 @@ A program that uses a getch function to search through a dictionary.json
 ### Instructions
 
 - Doesn't really work on windows
-- https://replit.com/@kingjaxon03/3013-P02-Starter-f run on replit :)
+- https://replit.com/@kingjaxon03/3013-P02-Final run on replit :)
 - Will change if it gets fixed
 
 
