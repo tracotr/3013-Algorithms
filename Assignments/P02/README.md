@@ -22,7 +22,7 @@ A program that uses a getch function to search through a dictionary.json
 
 -Here's it running in replit
 
-<img src="1.png" width="800">
-<img src="2.png" width="800">
-<img src="3.png" width="800">
-<img src="4.png" width="800">
+<img src="Capture.png" width="800">
+<img src="Capture2.png" width="800">
+<img src="Capture3.png" width="800">
+<img src="Capture4.png" width="800">
